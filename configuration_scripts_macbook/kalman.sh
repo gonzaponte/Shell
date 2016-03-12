@@ -1,0 +1,3 @@
+export KALMANDIR=$GITDIR/PyKalman/
+export PYTHONPATH=$PYTHONPATH:$KALMANDIR
+alias cdkal="cd $KALMANDIR"

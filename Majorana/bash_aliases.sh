@@ -7,8 +7,7 @@ alias ......="cd ../../../../.."
 
 # Listing and counting
 alias ls=" ls -h"
-alias l="lsla"
-alias count="ls -1|wc -l"
+alias l="ls -la"
 
 
 # Shortcuts

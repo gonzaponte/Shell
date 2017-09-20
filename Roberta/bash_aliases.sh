@@ -40,6 +40,6 @@ alias disable_spotlight="sudo mdutil -a -i off"
 alias enable_spotlight="sudo mdutil -a -i on"
 
 function setup(){
-source $GITDIR/Bash/configuration_scripts_macbook/$1.sh
-echo Enjoy $1
+source $GITDIR/Shell/Roberta/setups/setup_$1.sh
+echo $1 is set up 
 }

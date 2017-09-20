@@ -1,2 +1,2 @@
-export GIT=~/software/
-export CONF=$GIT/Shell/Majorana/
+export SW=~/software/
+export CONF=$SW/Shell/Majorana/

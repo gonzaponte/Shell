@@ -6,7 +6,7 @@ alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
 # Listing and counting
-alias ls=" ls -h"
+alias ls=" ls -h --color=auto"
 alias l="ls -la"
 
 

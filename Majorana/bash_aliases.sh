@@ -11,6 +11,7 @@ alias l="ls -la"
 
 
 # Shortcuts
+alias emnw="emacs -nw"
 alias untar="tar -xzvf"
 alias mergepdf="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
 alias rmlatex="rm *.tex~;rm *.aux;rm *.synctex.gz;rm *.log;rm *.toc; rm *.nav; rm *.snm; rm *.out;rm *.lof"

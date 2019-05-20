@@ -15,6 +15,8 @@ alias l="lsla"
 
 alias count="ls -1|wc -l"
 
+alias emacs="emacs -nw -q"
+
 alias root="root -l"
 alias untar="tar -xzvf"
 alias dropbox="cd ~/Dropbox/"

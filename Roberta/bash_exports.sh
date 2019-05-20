@@ -17,3 +17,5 @@ export LANG=en_US.UTF-8
 
 export IC_DATA=$GITDIR/NEXTdata/
 export ALPHASDIR=$IC_DATA/Alphas/
+
+export EDITOR="emacs -nw -q"

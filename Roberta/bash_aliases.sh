@@ -84,3 +84,4 @@ function lemacp(){
 nextcp /data4/NEXT/users/gmartinez/topo/$1 $2
 }
 
+alias realpath="python -c 'import os, sys; print(os.path.abspath(os.path.dirname(sys.argv[1])))'"

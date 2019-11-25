@@ -1,0 +1,5 @@
+export ICARO=$GITDIR/ICAROS/
+export PYTHONPATH=$ICARO:$PYTHONPATH
+export PATH=$ICARO/bin:$PATH
+
+

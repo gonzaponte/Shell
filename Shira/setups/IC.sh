@@ -4,5 +4,5 @@ then
 fi
 
 cd $GITDIR/IC
-source manage.sh work_in_python_version 3.7
+source manage.sh work_in_python_version_no_tests 3.7
 cd -

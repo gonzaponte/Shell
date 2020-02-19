@@ -67,3 +67,5 @@ alias realpath="python -c 'import os, sys; print(os.path.abspath(os.path.dirname
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+
+alias svpn='snx -s svpn.weizmann.ac.il -u '

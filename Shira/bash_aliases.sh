@@ -43,6 +43,7 @@ alias pyi="pythoni"
 
 alias scroll="tput rmcup"
 
+
 function setup(){
 source ~/.configuration_scripts/$1.sh
 echo Enjoy $1
@@ -54,12 +55,20 @@ scp -P 6030 icuser@195.77.159.50:$1 $2
 }
 
 function nextcp(){
-echo scp lema@neutrinos1.ific.uv.es:$1 $2
-scp lema@neutrinos1.ific.uv.es:$1 $2
+from=$1
+to=$2
+shift
+shift
+echo scp $@ lema@neutrinos1.ific.uv.es:${from} ${to}
+scp $@ lema@neutrinos1.ific.uv.es:${from} ${to}
 }
 
 function lemacp(){
-nextcp /data4/NEXT/users/gmartinez/topo/$1 $2
+from=$1
+to=$2
+shift
+shift
+nextcp /data4/NEXT/users/gmartinez/topo/${from} ${to} $@
 }
 
 alias realpath="python -c 'import os, sys; print(os.path.abspath(os.path.dirname(sys.argv[1])))'"

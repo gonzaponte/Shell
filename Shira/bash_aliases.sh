@@ -69,3 +69,5 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
 alias svpn='snx -s svpn.weizmann.ac.il -u '
+
+alias mvss="mv $HOME/Imaxes/Captura* $HOME/Imaxes/Screenshots/"

@@ -1,1 +1,3 @@
-. /home/gonzalo/sw/anaconda3/etc/profile.d/conda.sh
+export ANACONDADIR=$SWDIR/anaconda3
+
+. $ANACONDADIR/etc/profile.d/conda.sh

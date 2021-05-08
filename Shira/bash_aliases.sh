@@ -81,3 +81,12 @@ alias pbpasteimg='xclip -selection clipboard -y image/png -o'
 alias svpn='snx -s svpn.weizmann.ac.il -u '
 
 alias mvss="mv $HOME/Imaxes/Captura* $HOME/Imaxes/Screenshots/"
+
+
+function startcbd(){
+    if [[ -z $(ps -e | grep clipboard_dump) ]]; then
+        $GITDIR/Shell/clipboard_dumper.sh >& /dev/null &
+    fi
+#    pid=$!
+#    trap "kill ${pid}" EXIT
+}

@@ -19,6 +19,7 @@ alias root="root -l"
 alias untar="tar -xzvf"
 
 alias next="ssh -Y lema@neutrinos1.ific.uv.es"
+alias majorana="ssh -Y lema@majorana1.ific.uv.es"
 
 alias shifter="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6030"
 alias shifter2="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6031"

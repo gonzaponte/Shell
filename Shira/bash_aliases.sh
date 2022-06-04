@@ -27,7 +27,8 @@ alias icuser="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentica
 alias icuser2="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no icuser@195.77.159.50 -p 6031"
 
 alias gridcsic="ssh -Y braispal@ui00.ific.uv.es" #Bpp.3/7/92
-alias griddipc="ssh -t jjgomez@ac-01.sw.ehu.es ssh atlas.sw.ehu.es"
+#alias griddipc="ssh -t jjgomez@ac-01.sw.ehu.es ssh atlas.sw.ehu.es"
+alias dipc="ssh -Y jjgomez@atlas-fdr.sw.ehu.es" 
 
 alias pythoni="python -i"
 alias rmlatex="rm *.tex~;rm *.aux;rm *.synctex.gz;rm *.log;rm *.toc; rm *.nav; rm *.snm; rm *.out;rm *.lof"

@@ -92,3 +92,31 @@ function startcbd(){
 #    pid=$!
 #    trap "kill ${pid}" EXIT
 }
+
+
+function setup_anaconda3(){
+. $SWDIR/anaconda3/etc/profile.d/conda.sh
+}
+
+
+function setup_ic_prod(){
+setup_anaconda3
+
+conda deactivate
+
+conda activate IC-3.7-2020-06-16
+export ICTDIR=$GITDIR/IC
+export ICDIR=$ICTDIR/invisible_cities/
+export PYTHONPATH=$ICTDIR
+export PATH=$ICTDIR/bin:$PATH
+
+export HDF5_USE_FILE_LOCKING=FALSE
+}
+
+function echoo(){
+  var=$1
+  echo $var ${!var}
+}
+
+
+

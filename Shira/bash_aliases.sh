@@ -45,6 +45,10 @@ alias pyi="pythoni"
 
 alias scroll="tput rmcup"
 
+function mkcd(){
+    mkdir $@
+    cd $1
+}
 
 function setup(){
 source ~/.configuration_scripts/$1.sh
@@ -118,5 +122,48 @@ function echoo(){
   echo $var ${!var}
 }
 
+function replace_whitespaces(){
+    arg=$1
+    shift
+    mv "$arg" "${arg// /_}"
+    if [[ $# -ne 0 ]]; then
+        replace_whitespaces "$@"
+    fi
+}
+
+function m4a_to_mp3(){
+    filein=${1}
+    fileout=${2}/${filein//m4a/mp3}
+    ffmpeg -i ${filein} -c:v copy -c:a libmp3lame -q:a 4 ${fileout}
+}
+
+function webp_to_png(){
+    dwebp {} -o $1.png ::: $1
+}
+
+function clean_root(){
+    echo "These are the packages installed with snap:"
+    echo ""
+    snap list --all
+    echo ""
+    echo "Now removing the following packages:"
+    snap list --all | grep "desactivado"
+    while true; do
+        read -p "OK?(y/N)" yn
+        case $yn in
+            [nN]* ) return;;
+            [yY]* ) break;;
+            * ) echo "Invalid answer";;
+        esac
+    done
+    snap list --all | while read snapname v rev notes; do
+        if [[ $notes = *desactivado* ]]; then
+            echo "Removing $snapname $rev"
+            sudo snap remove "$snapname" --revision="$rev"
+        fi
+    done
+
+
+}
 
 

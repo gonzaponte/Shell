@@ -166,4 +166,8 @@ function clean_root(){
 
 }
 
+alias em="emacs &"
+alias emnw="emacs -nw"
 
+
+alias bat="batcat"

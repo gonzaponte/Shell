@@ -1,6 +1,6 @@
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -79,7 +79,7 @@
  '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
-    (transpose-frame multiple-cursors minimap auto-complete find-file-in-project company eglot-jl flymake-go flymake-python-pyflakes eglot helm magit use-package)))
+    (git-timemachine avy cmake-mode meson-mode nix-mode transpose-frame multiple-cursors minimap auto-complete find-file-in-project company eglot-jl flymake-go flymake-python-pyflakes eglot helm magit use-package)))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -111,12 +111,20 @@
 (unless (fboundp 'package-activate-all) (package-initialize))
 
 (setq package-list
-    '(eglot company find-file-in-project auto-complete popup minimap multiple-cursors move-text transpose-frame))
+    '(avy nix-mode cmake-mode meson-mode eglot helm magit git-timemachine company find-file-in-project auto-complete popup minimap multiple-cursors move-text transpose-frame))
 
 ;; install the missing packages
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
+
+;; NIX-MODE
+(require 'nix-mode)
+(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+
+;; MESON MODE
+(add-hook 'meson-mode-hook 'company-mode)
+
 
 ;; CLANGD
 (require 'eglot)
@@ -164,3 +172,8 @@
 (global-set-key (kbd "C-M-m f"    ) 'mc/mark-next-symbol-like-this)
 (global-set-key (kbd "C-M-m b"    ) 'mc/mark-previous-symbol-like-this)
 (global-set-key (kbd "C-M-m 0"    ) 'mc/insert-numbers)
+
+
+;; AVY
+(global-set-key (kbd "C-x j l") 'avy-goto-line)
+(global-set-key (kbd "C-x j s") 'avy-goto-char-timer)

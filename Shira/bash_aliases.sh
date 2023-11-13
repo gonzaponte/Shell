@@ -156,6 +156,7 @@ function clean_root(){
             * ) echo "Invalid answer";;
         esac
     done
+    sudo echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     snap list --all | while read snapname v rev notes; do
         if [[ $notes = *desactivado* ]]; then
             echo "Removing $snapname $rev"

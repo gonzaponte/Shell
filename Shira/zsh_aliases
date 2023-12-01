@@ -162,8 +162,10 @@ function clean_root(){
             sudo snap remove "$snapname" --revision="$rev"
         fi
     done
+}
 
-
+function clear_logs() {
+  sudo journalctl --vacuum-time=10d
 }
 
 alias em="emacs &"

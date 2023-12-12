@@ -176,8 +176,31 @@
 
 
 ;; AVY
-(global-set-key (kbd "C-x j l") 'avy-goto-line)
-(global-set-key (kbd "C-x j s") 'avy-goto-char-timer)
+
+;; (defun avy-goto-parens ()
+;;   (interactive)
+;;   (let ((avy-command this-command))   ; for look up in avy-orders-alist
+;;     (avy-jump "(+")))
+;; (add-to-list 'avy-orders-alist '(avy-goto-parens . avy-order-closest))
+
+(global-set-key (kbd "C-x a l")   'avy-goto-line)
+(global-set-key (kbd "C-x a c")   'avy-goto-char-timer)
+(global-set-key (kbd "C-x C-a l") 'avy-copy-line)
+(global-set-key (kbd "C-x C-a r") 'avy-copy-region)
+;; (global-set-key (kbd "C-x a p")   'avy-goto-parens)
+
+(setq avy-all-windows 'all-frames)
+(setq avy-background t)
+(setq avy-case-fold-search nil)
+(setq avy-highlight-first t)
+(setq avy-timeout-seconds 0.8)
+
+(defface avy-lead-face            '((t (:foreground "white" :background "red"   ))) "")
+(defface avy-lead-face-0          '((t (:foreground "white" :background "green" ))) "")
+(defface avy-lead-face-2          '((t (:foreground "white" :background "blue"  ))) "")
+(defface avy-goto-char-timer-face '((t (:foreground "white" :background "yellow"))) "")
+
+
 ;; MAIL
 (setq mail-user-agent 'message-user-agent)
 (setq message-send-mail-function 'smtpmail-send-it

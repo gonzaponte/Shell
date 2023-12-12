@@ -165,8 +165,37 @@ function clean_root(){
 }
 
 function clear_logs() {
-  sudo journalctl --vacuum-time=10d
+  /etc/cron.daily/logrotate
+  sudo journalctl --rotate
+  sudo journalctl --vacuum-time=5d
+  sudo journalctl --vacuum-size=50M
 }
+
+function remove_old_kernels() {
+  dpkg --list | grep 'linux-image'   | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p' | xargs sudo apt-get -y purge
+  dpkg --list | grep 'linux-headers' | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p' | xargs sudo apt-get -y purge
+}
+
+function clear_apt_cache() {
+  sudo apt-get update
+  sudo apt-get -f install
+  sudo apt-get -y autoremove
+  sudo apt-get clean
+}
+
+function clear_snap_cache() {
+  if [[ $(sudo snap get system refresh.retain) -ne 2 ]]
+  then
+    sudo snap set system refresh.retain=2
+  fi
+  sudo su
+  rm /var/lib/snap/cache/* -rf
+}
+
+function clean_cland_garbage() {
+  rm /tmp/preamble-*
+}
+
 
 alias em="emacs &"
 alias emnw="emacs -nw"

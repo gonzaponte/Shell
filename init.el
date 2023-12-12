@@ -79,7 +79,8 @@
  '(indent-tabs-mode nil)
  '(package-selected-packages
    (quote
-    (git-timemachine avy cmake-mode meson-mode nix-mode transpose-frame multiple-cursors minimap auto-complete find-file-in-project company eglot-jl flymake-go flymake-python-pyflakes eglot helm magit use-package)))
+    (smartparens notmuch-addr git-timemachine avy cmake-mode meson-mode nix-mode transpose-frame multiple-cursors minimap auto-complete find-file-in-project company eglot-jl flymake-go flymake-python-pyflakes eglot helm magit use-package notmuch)))
+ '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -177,3 +178,37 @@
 ;; AVY
 (global-set-key (kbd "C-x j l") 'avy-goto-line)
 (global-set-key (kbd "C-x j s") 'avy-goto-char-timer)
+;; MAIL
+(setq mail-user-agent 'message-user-agent)
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-stream-type 'starttls
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587)
+
+;; NOTMUCH
+(use-package notmuch
+  :init
+  (setq message-directory "~/.mail")
+  (setq send-mail-function 'sendmail-send-it)
+  ;; Send from correct email account
+  (setq message-sendmail-f-is-eval 't)
+  (setq message-sendmail-extra-arguments '("--read-envelope-from"))
+  (setq mail-specify-envelope-from 't)
+  (setq mail-envelope-from 'header)
+  (setq message-sendmail-envelope-from 'header)
+  ;; Setting proper from, fixes i-did-not-set--mail-host-address--so-tickle-me
+  (setq mail-host-address "blablabla.com")
+  (setq user-full-name "BLA BLA BLA")
+  :config
+  (setq notmuch-show-logo nil)
+  ;; Writing email
+  (setq message-default-mail-headers "Cc: \nBcc: \n") ;; Always show BCC
+  (setq notmuch-always-prompt-for-sender 't)
+  ;; PGP Encryption
+  (add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
+  (setq notmuch-crypto-process-mime t)
+  ;; Saving sent mail in folders depending on from
+  (setq notmuch-fcc-dirs '(("gonzaponte@gmail.com" . "gonzaponte@gmail.com/Sent")
+                           ("gonzalo.martinez.lema.weizmann@gmail.com" . "gonzalo.martinez.lema.weizmann@gmail.com/Sent")
+                           ))
+  )

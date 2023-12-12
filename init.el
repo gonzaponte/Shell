@@ -112,7 +112,7 @@
 (unless (fboundp 'package-activate-all) (package-initialize))
 
 (setq package-list
-    '(avy nix-mode cmake-mode meson-mode eglot helm magit git-timemachine company find-file-in-project auto-complete popup minimap multiple-cursors move-text transpose-frame))
+    '(avy nix-mode cmake-mode meson-mode eglot helm magit git-timemachine company find-file-in-project auto-complete popup minimap multiple-cursors move-text transpose-frame smartparens))
 
 ;; install the missing packages
 (dolist (package package-list)
@@ -212,3 +212,10 @@
                            ("gonzalo.martinez.lema.weizmann@gmail.com" . "gonzalo.martinez.lema.weizmann@gmail.com/Sent")
                            ))
   )
+
+;; SMART PARENS
+(require 'smartparens-config)
+;;(add-hook 'text-mode-hook #'smartparens-mode)
+;;(add-hook 'normal-mode-hook #'smartparens-mode)
+;;(add-hook 'c++-mode-hook #'smartparens-mode)
+(smartparens-global-mode)

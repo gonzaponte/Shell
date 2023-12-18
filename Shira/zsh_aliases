@@ -32,6 +32,7 @@ alias dipc="ssh -Y jjgomez@atlas-fdr.sw.ehu.es"
 
 alias demo="ssh gonzaloml@frontend1demo.ific.uv.es"
 alias petalo="ssh gonzaloml@frontend1petalo.ific.uv.es"
+alias hyperion="ssh jjgomez@hyperion-02.sw.ehu.es"
 
 alias pythoni="python -i"
 alias rmlatex="rm *.tex~;rm *.aux;rm *.synctex.gz;rm *.log;rm *.toc; rm *.nav; rm *.snm; rm *.out;rm *.lof"

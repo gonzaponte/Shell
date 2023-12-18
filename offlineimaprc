@@ -1,0 +1,108 @@
+[general]
+accounts = personal, weizmann, bgu
+ui       = ttyui
+
+[Account personal]
+localrepository  = personal-local
+remoterepository = personal-remote
+synclabels       = yes
+labelsheader     = X-Keywords
+autorefresh      = 1
+
+[Account weizmann]
+localrepository  = weizmann-local
+remoterepository = weizmann-remote
+synclabels       = yes
+labelsheader     = X-Keywords
+autorefresh      = 5
+
+[Account bgu]
+localrepository  = bgu-local
+remoterepository = bgu-remote
+synclabels       = yes
+labelsheader     = X-Keywords
+autorefresh      = 10
+
+[Repository personal-local]
+type         = GmailMaildir
+localfolders = /home/$USER/mail/USER@gmail.com
+nametrans    = lambda label: {
+  'entrada'    : 'INBOX',
+  'borradores' : '[Gmail]/Borradores',
+  'delete'     : '[Gmail]/Caixa da papeleira',
+  'enviado'    : '[Gmail]/Correo enviado',
+  'estrelado'  : '[Gmail]/Marcado con estrela',
+  'todo'       : '[Gmail]/Todo o correo'
+  }.get(label, label)
+
+[Repository weizmann-local]
+type         = GmailMaildir
+localfolders = /home/$USER/mail/USER@gmail.com
+nametrans    = lambda label: {
+  'entrada'    : 'INBOX',
+  'borradores' : '[Gmail]/Borradores',
+  'delete'     : '[Gmail]/Caixa da papeleira',
+  'enviado'    : '[Gmail]/Correo enviado',
+  'estrelado'  : '[Gmail]/Marcado con estrela',
+  'todo'       : '[Gmail]/Todo o correo'
+  }.get(label, label)
+
+[Repository bgu-local]
+type         = GmailMaildir
+localfolders = /home/$USER/mail/USER@post.bgu.ac.il
+nametrans    = lambda label: {
+  'entrada'    : 'INBOX',
+  'borradores' : '[Gmail]/Borradores',
+  'delete'     : '[Gmail]/Caixa da papeleira',
+  'enviado'    : '[Gmail]/Correo enviado',
+  'estrelado'  : '[Gmail]/Marcado con estrela',
+  'todo'       : '[Gmail]/Todo o correo'
+  }.get(label, label)
+
+[Repository personal-remote]
+type          = Gmail
+remotehost    = imap.gmail.com
+remoteuser    = USER@gmail.com
+remotepass    = PASS
+ssl           = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+nametrans     = lambda label : {
+  'INBOX'                       : 'entrada',
+  '[Gmail]/Borradores'          : 'borradores',
+  '[Gmail]/Caixa da papeleira'  : 'delete',
+  '[Gmail]/Correo enviado'      : 'enviado',
+  '[Gmail]/Marcado con estrela' : 'estrelado',
+  '[Gmail]/Todo o correo'       : 'todo'
+  }.get(label, label)
+
+[Repository weizmann-remote]
+type          = Gmail
+remotehost    = imap.gmail.com
+remoteuser    = USER@gmail.com
+remotepass    = PASS
+ssl           = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+nametrans     = lambda label : {
+  'INBOX'                       : 'entrada',
+  '[Gmail]/Borradores'          : 'borradores',
+  '[Gmail]/Caixa da papeleira'  : 'delete',
+  '[Gmail]/Correo enviado'      : 'enviado',
+  '[Gmail]/Marcado con estrela' : 'estrelado',
+  '[Gmail]/Todo o correo'       : 'todo'
+  }.get(label, label)
+
+[Repository bgu-remote]
+type          = Gmail
+remotehost    = imap.gmail.com
+remoteuser    = USER@post.bgu.ac.il
+remotepass    = PASS
+ssl           = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+nametrans     = lambda label : {
+  'INBOX'                       : 'entrada',
+  '[Gmail]/Borradores'          : 'borradores',
+  '[Gmail]/Caixa da papeleira'  : 'delete',
+  '[Gmail]/Correo enviado'      : 'enviado',
+  '[Gmail]/Marcado con estrela' : 'estrelado',
+  '[Gmail]/Todo o correo'       : 'todo'
+  }.get(label, label)

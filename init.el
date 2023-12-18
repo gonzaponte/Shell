@@ -87,7 +87,8 @@
                       nil
                       :weight 'bold
                       :slant 'italic
-                      :foreground "purple"
+                      :foreground "black"
+                      :background "purple"
                       :underline t))
 
 ;; HOOKS

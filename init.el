@@ -114,7 +114,9 @@
 (add-hook 'magit-mode-hook  'highlight-current-line    ) ;; highlight current line in magit
 
 ;; THEME
-(load-theme 'wombat t)
+(load-file "~/.emacs.d/gonzalo.el")
+(enable-theme 'gonzalo)
+
 
 ;; NIX-MODE
 (require 'nix-mode)

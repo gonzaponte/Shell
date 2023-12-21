@@ -28,16 +28,18 @@
 
   :config
   (setq magit-last-seen-setup-instructions "1.4.0")
-  (global-magit-file-mode 1)
+;;  (global-magit-file-mode 1)
   (magit-define-popup-switch 'magit-log-popup ?p "first parent" "--first-parent"))
 
 
 (use-package helm
-  :bind (("C-c h h" . helm-command-prefix)
+  :bind (
          ("M-x"     . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("M-y"     . helm-show-kill-ring)
          ("C-x b"   . helm-mini)
+         ("C-x c g" . helm-do-grep)
+         ("C-x c o" . helm-occur)
 
          :map helm-map
          ;; ("<tab>" . helm-execute-persistent-action) ; Bug: gets
@@ -46,13 +48,9 @@
          ;;("C-i"   . helm-execute-persistent-action)
          ("C-z"   . helm-select-action)
 
-         :map
-         helm-command-prefix
-         ("g"     . helm-do-grep)
-         ("o"     . helm-occur))
+         )
 
   :config
-  (require 'helm-config)
   ;; Bug: :bind :map doesn't seem to work properly for special keys,
   ;; and bind <tab> in the global map.
   (bind-key "<tab>" #'helm-execute-persistent-action helm-map)
@@ -72,28 +70,48 @@
 
 
 (custom-set-variables
- '(indent-tabs-mode nil) ;; spaces, not tabs
- '(show-paren-mode t) ;; highlight matching parens
- '(send-mail-function (quote mailclient-send-it)) ;; send mail fn
-)
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(indent-tabs-mode nil)
+ '(package-selected-packages
+   '(notmuch xclip transpose-frame smartparens nix-mode multiple-cursors move-text minimap meson-mode magit lsp-mode helm git-timemachine find-file-in-project company cmake-mode avy auto-complete atomic-chrome))
+ '(send-mail-function 'mailclient-send-it)
+ '(show-paren-mode t))
 
-(custom-set-faces
-)
+;;(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+;; )
 
 (defun highlight-current-branch ()
   "Highlight the current branch in Magit buffers."
   (interactive)
   (set-face-attribute 'magit-branch-current
                       nil
+                      :inverse-video nil
                       :weight 'bold
                       :slant 'italic
-                      :foreground "black"
-                      :background "purple"
+                      :foreground "purple"
+;;                      :background "black"
                       :underline t))
+
+(defun highlight-current-line ()
+  "Highlight the current branch in Magit buffers."
+  (interactive)
+  (set-face-attribute 'magit-section-highlight
+                      nil
+                      :background "black"
+                      ))
+
 
 ;; HOOKS
 (add-hook 'write-file-hooks 'delete-trailing-whitespace) ;; delete spurious whitespaces when saving a file
-(add-hook 'magit-mode-hook  'highlight-current-branch) ;; highlight current branch in magit
+(add-hook 'magit-mode-hook  'highlight-current-branch  ) ;; highlight current branch in magit
+(add-hook 'magit-mode-hook  'highlight-current-line    ) ;; highlight current line in magit
 
 ;; THEME
 (load-theme 'wombat t)
@@ -118,6 +136,8 @@
 ;; LINE NUMBERS
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
+
+(setq column-number-mode t)
 
 ;; MOVE TEXT
 (global-set-key (kbd "C-<up>") 'move-text-up)
@@ -172,10 +192,10 @@
 (setq avy-highlight-first t)
 (setq avy-timeout-seconds 0.8)
 
-(defface avy-lead-face            '((t (:foreground "white" :background "red"   ))) "")
-(defface avy-lead-face-0          '((t (:foreground "white" :background "green" ))) "")
-(defface avy-lead-face-2          '((t (:foreground "white" :background "blue"  ))) "")
-(defface avy-goto-char-timer-face '((t (:foreground "white" :background "yellow"))) "")
+(defface avy-lead-face            '((t (:foreground "brightwhite" :background "blue"       :weight bold))) "")
+(defface avy-lead-face-0          '((t (:foreground "brightwhite" :background "firebrick4" :weight bold))) "")
+(defface avy-lead-face-2          '((t (:foreground "brightwhite" :background "green"      :weight bold))) "")
+(defface avy-goto-char-timer-face '((t (:foreground "brightwhite" :background "yellow"     :weight bold))) "")
 
 
 ;; MAIL
@@ -186,33 +206,33 @@
       smtpmail-smtp-service 587)
 
 ;; NOTMUCH
-(use-package notmuch
-  :init
-  (setq message-directory "~/.mail")
-  (setq send-mail-function 'sendmail-send-it)
-  ;; Send from correct email account
-  (setq message-sendmail-f-is-eval 't)
-  (setq message-sendmail-extra-arguments '("--read-envelope-from"))
-  (setq mail-specify-envelope-from 't)
-  (setq mail-envelope-from 'header)
-  (setq message-sendmail-envelope-from 'header)
-  ;; Setting proper from, fixes i-did-not-set--mail-host-address--so-tickle-me
-  (setq mail-host-address "blablabla.com")
-  (setq user-full-name "BLA BLA BLA")
-  :config
-  (setq notmuch-show-logo nil)
-  ;; Writing email
-  (setq message-default-mail-headers "Cc: \nBcc: \n") ;; Always show BCC
-  (setq notmuch-always-prompt-for-sender 't)
-  ;; PGP Encryption
-  (add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
-  (setq notmuch-crypto-process-mime t)
-  ;; Saving sent mail in folders depending on from
-  (setq notmuch-fcc-dirs '(("gonzaponte@gmail.com" . "gonzaponte@gmail.com/Gmail.Correo_enviado")
-                           ("gonzalo.martinez.lema.weizmann@gmail.com" . "gonzalo.martinez.lema.weizmann@gmail.com/Gmail.Correo_enviado'")
-                           ))
-  (setq notmuch-search-oldest-first nil)
-  )
+;; (use-package notmuch
+;;   :init
+(setq message-directory "~/.mail")
+(setq send-mail-function 'sendmail-send-it)
+;; Send from correct email account
+(setq message-sendmail-f-is-eval 't)
+(setq message-sendmail-extra-arguments '("--read-envelope-from"))
+(setq mail-specify-envelope-from 't)
+(setq mail-envelope-from 'header)
+(setq message-sendmail-envelope-from 'header)
+;; Setting proper from, fixes i-did-not-set--mail-host-address--so-tickle-me
+(setq mail-host-address "blablabla.com")
+(setq user-full-name "BLA BLA BLA")
+:config
+(setq notmuch-show-logo nil)
+;; Writing email
+(setq message-default-mail-headers "Cc: \nBcc: \n") ;; Always show BCC
+(setq notmuch-always-prompt-for-sender 't)
+;; PGP Encryption
+(add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
+(setq notmuch-crypto-process-mime t)
+;; Saving sent mail in folders depending on from
+(setq notmuch-fcc-dirs '(("gonzaponte@gmail.com" . "gonzaponte@gmail.com/enviado")
+                         ("gonzalo.martinez.lema.weizmann@gmail.com" . "gonzalo.martinez.lema.weizmann@gmail.com/enviado'")
+                         ))
+(setq notmuch-search-oldest-first nil)
+;;  )
 
 ;; SMART PARENS
 (require 'smartparens-config)

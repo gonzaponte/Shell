@@ -200,6 +200,36 @@ function clean_cland_garbage() {
   rm /tmp/preamble-*
 }
 
+function fetch_mail() {
+  echo "======================================================"
+  echo "Fetching new email on $(date)"
+  echo "======================================================"
+  notmuch new
+  offlineimap -o
+  notmuch new
+}
+
+function fetch_mail_daemon() {
+  wait=${1:-60}
+  while true
+  do
+    fetch_mail
+    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    echo "Now waiting for $wait seconds"
+    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  sleep $wait
+  done
+}
+
+function sync_deletions() {
+  notmuch new
+  for msg in $(notmuch search --output=files --format=text tag:deleted | grep "gmail")
+  do
+    account=$(echo "$msg" | cut -d "/" -f 5)
+    mv $msg ~/mail/$account/delete/cur
+  done
+  notmuch new
+}
 
 alias em="emacs &"
 alias emnw="emacs -nw"

@@ -3,5 +3,6 @@ export GITDIR=$SWDIR/git
 
 export PATH=$PATH:$GITDIR/ShittyScripts
 export PATH=$PATH:$GITDIR/git-latexdiff
+export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$SWDIR/anydesk
 export EDITOR="emacs -nw"

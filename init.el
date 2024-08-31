@@ -65,8 +65,16 @@
         helm-move-to-line-cycle-in-source     nil
         helm-command-prefix-key               "C-z")
 
+  (set-face-attribute 'helm-selection nil
+                    :background "white"
+                    :foreground "black"
+                    :weight     'bold
+                    :slant      'italic
+                    )
+
   (helm-mode 1)
   (helm-autoresize-mode t))
+
 
 
 
@@ -117,6 +125,8 @@
 ;; THEME
 (load-file "~/.emacs.d/gonzalo.el")
 (enable-theme 'gonzalo)
+(set-face-attribute 'region  nil :background "slateblue4" :foreground "white")
+(set-face-attribute 'isearch nil :background "slateblue4" :foreground "white")
 
 
 ;; NIX-MODE
@@ -247,3 +257,12 @@
 
 ;; XCLIP
 (xclip-mode 1)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; FLYMAKE
+(global-set-key (kbd "C-x f") 'flymake-goto-next-error)

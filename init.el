@@ -85,7 +85,7 @@
  ;; If there is more than one, they won't work right.
  '(indent-tabs-mode nil)
  '(package-selected-packages
-   '(notmuch xclip transpose-frame smartparens nix-mode multiple-cursors move-text minimap meson-mode magit lsp-mode helm git-timemachine find-file-in-project company cmake-mode avy auto-complete atomic-chrome))
+   '(rust-mode notmuch xclip transpose-frame smartparens nix-mode multiple-cursors move-text minimap meson-mode magit lsp-mode helm git-timemachine find-file-in-project company cmake-mode avy auto-complete atomic-chrome))
  '(send-mail-function 'mailclient-send-it)
  '(show-paren-mode t))
 
@@ -142,6 +142,10 @@
 (add-to-list 'eglot-server-programs '((c++-mode c-mode) "clangd"))
 (add-hook 'c-mode-hook 'eglot-ensure)
 (add-hook 'c++-mode-hook 'eglot-ensure)
+
+;; RUST-MODE
+(require 'rust-mode)
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 
 ;; COMPANY
 (global-company-mode)

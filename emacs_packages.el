@@ -39,6 +39,7 @@
                      notmuch
                      notmuch-addr
                      popup
+                     rust-mode
                      smartparens
                      transpose-frame
                      xclip

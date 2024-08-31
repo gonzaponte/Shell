@@ -21,8 +21,9 @@ alias untar="tar -xzvf"
 alias next="ssh -Y lema@neutrinos1.ific.uv.es"
 alias majorana="ssh -Y lema@majorana1.ific.uv.es"
 
-alias shifter="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6030"
+alias shifter1="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6030"
 alias shifter2="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6031"
+alias shifter="ssh -Y -v shifter@lsc.next-experiment.org -p 6030"
 alias icuser="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no icuser@195.77.159.50 -p 6030"
 alias icuser2="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no icuser@195.77.159.50 -p 6031"
 
@@ -33,6 +34,8 @@ alias dipc="ssh -Y jjgomez@atlas-fdr.sw.ehu.es"
 alias demo="ssh gonzaloml@frontend1demo.ific.uv.es"
 alias petalo="ssh gonzaloml@frontend1petalo.ific.uv.es"
 alias hyperion="ssh jjgomez@hyperion-02.sw.ehu.es"
+
+alias bgu="ssh gonzalom@sge250.bgu.ac.il"
 
 alias pythoni="python -i"
 alias rmlatex="rm *.tex~;rm *.aux;rm *.synctex.gz;rm *.log;rm *.toc; rm *.nav; rm *.snm; rm *.out;rm *.lof"
@@ -79,6 +82,24 @@ to=$2
 shift
 shift
 nextcp /data4/NEXT/users/gmartinez/topo/${from} ${to} $@
+}
+
+function bgu2local() {
+  from=$1
+  to=$2
+  shift
+  shift
+  echo scp $@ gonzalom@sge250.bgu.ac.il:${from} ${to}
+  scp $@ gonzalom@sge250.bgu.ac.il:${from} ${to}
+}
+
+function local2bgu() {
+  from=$1
+  to=$2
+  shift
+  shift
+  echo scp $@ ${from} gonzalom@sge250.bgu.ac.il:${to}
+  scp $@ ${from} gonzalom@sge250.bgu.ac.il:${to}
 }
 
 alias realpath="python -c 'import os, sys; print(os.path.abspath(os.path.dirname(sys.argv[1])))'"

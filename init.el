@@ -29,7 +29,8 @@
   :config
   (setq magit-last-seen-setup-instructions "1.4.0")
 ;;  (global-magit-file-mode 1)
-  (magit-define-popup-switch 'magit-log-popup ?p "first parent" "--first-parent"))
+;;  (magit-define-popup-switch 'magit-log-popup ?p "first parent" "--first-parent")
+)
 
 
 (use-package helm

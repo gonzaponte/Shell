@@ -23,7 +23,7 @@ alias majorana="ssh -Y lema@majorana1.ific.uv.es"
 
 alias shifter1="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6030"
 alias shifter2="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no shifter@195.77.159.50 -p 6031"
-alias shifter="ssh -Y -v shifter@lsc.next-experiment.org -p 6030"
+alias shifter="ssh -Y shifter@lsc.next-experiment.org -p 6030"
 alias icuser="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no icuser@195.77.159.50 -p 6030"
 alias icuser2="ssh -Y -v -o PreferredAuthentications=password -o PubkeyAuthentication=no icuser@195.77.159.50 -p 6031"
 

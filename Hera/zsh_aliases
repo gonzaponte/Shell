@@ -254,3 +254,5 @@ function sync_deletions() {
 
 alias em="emacs &"
 alias emnw="emacs -nw"
+
+alias meow="nixGL kitty"

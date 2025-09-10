@@ -1,0 +1,7 @@
+export SWDIR=/home/gonzalo/sw
+export GITDIR=$SWDIR/git
+
+export PATH=$PATH:$GITDIR/ShittyScripts
+export PATH=$PATH:$GITDIR/git-latexdiff
+export PATH=$PATH:$SWDIR/anydesk
+export EDITOR="emacs -nw"

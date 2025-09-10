@@ -35,11 +35,11 @@ are included."
 (let ((class '((class color) (min-colors 89))))
   (custom-theme-set-faces
    'gonzalo
-   `(default ((,class (:background "#black" :foreground "#brightwhite"))))
+   `(default ((,class (:background "#black" :foreground "#FFFFFF"))))
    `(cursor ((,class (:background "#656565"))))
    ;; Highlighting faces
    `(fringe ((,class (:background "#303030"))))
-   `(highlight ((,class (:background "#454545" :foreground "#ffffff"
+   `(highlight ((,class (:background "#343434" :foreground "#FFF800"
 			 :underline t))))
    `(region ((,class (:background "#444444"))))
    `(secondary-selection ((,class (:background "#333366" :foreground "#f6f3e8"))))

@@ -1,5 +1,5 @@
 [general]
-accounts = personal, weizmann, bgu
+accounts = personal, weizmann
 ui       = ttyui
 
 [Account personal]
@@ -47,18 +47,6 @@ nametrans    = lambda label: {
   'todo'       : '[Gmail]/Todo o correo'
   }.get(label, label)
 
-[Repository bgu-local]
-type         = GmailMaildir
-localfolders = /home/$USER/mail/USER@post.bgu.ac.il
-nametrans    = lambda label: {
-  'entrada'    : 'INBOX',
-  'borradores' : '[Gmail]/Borradores',
-  'delete'     : '[Gmail]/Caixa da papeleira',
-  'enviado'    : '[Gmail]/Correo enviado',
-  'estrelado'  : '[Gmail]/Marcado con estrela',
-  'todo'       : '[Gmail]/Todo o correo'
-  }.get(label, label)
-
 [Repository personal-remote]
 type          = Gmail
 remotehost    = imap.gmail.com
@@ -79,22 +67,6 @@ nametrans     = lambda label : {
 type          = Gmail
 remotehost    = imap.gmail.com
 remoteuser    = USER@gmail.com
-remotepass    = PASS
-ssl           = yes
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-nametrans     = lambda label : {
-  'INBOX'                       : 'entrada',
-  '[Gmail]/Borradores'          : 'borradores',
-  '[Gmail]/Caixa da papeleira'  : 'delete',
-  '[Gmail]/Correo enviado'      : 'enviado',
-  '[Gmail]/Marcado con estrela' : 'estrelado',
-  '[Gmail]/Todo o correo'       : 'todo'
-  }.get(label, label)
-
-[Repository bgu-remote]
-type          = Gmail
-remotehost    = imap.gmail.com
-remoteuser    = USER@post.bgu.ac.il
 remotepass    = PASS
 ssl           = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt

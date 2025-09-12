@@ -8,3 +8,5 @@ export PATH=$PATH:$SWDIR/anydesk
 export EDITOR="emacs -nw"
 export DOOMBIN="$HOME/.config/emacs/bin"
 export PATH=$PATH:$DOOMBIN
+
+eval "$(pay-respects zsh --alias)"

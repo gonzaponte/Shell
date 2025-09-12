@@ -216,40 +216,62 @@
 
 
 ;; MAIL
+;; SMTP
 ;; (setq mail-user-agent 'message-user-agent)
-;; (setq message-send-mail-function 'smtpmail-send-it
+;; (setq send-mail-function 'smtpmail-send-it
+;;       message-send-mail-function 'smtpmail-send-it
 ;;       smtpmail-stream-type 'starttls
 ;;       smtpmail-smtp-server "smtp.gmail.com"
-;;       smtpmail-smtp-service 587)
+;;       smtpmail-smtp-service 587
+;;       user-mail-address "USER@gmail.com"
+;;       smtpmail-smtp-user "USER@gmail.com"
+;;       smtpmail-smtp-password "XXXX XXXX XXXX XXXX")
+
+
+;; (setq user-full-name "FULL NAME"
+;;       user-mail-address "USER@gmail.com")
 
 ;; NOTMUCH
-;; (use-package notmuch
-;;   :init
-;; (setq message-directory "~/.mail")
-;; (setq send-mail-function 'sendmail-send-it)
-;; ;; Send from correct email account
-;; (setq message-sendmail-f-is-eval 't)
-;; (setq message-sendmail-extra-arguments '("--read-envelope-from"))
-;; (setq mail-specify-envelope-from 't)
-;; (setq mail-envelope-from 'header)
-;; (setq message-sendmail-envelope-from 'header)
-;; ;; Setting proper from, fixes i-did-not-set--mail-host-address--so-tickle-me
-;; (setq mail-host-address "blablabla.com")
-;; (setq user-full-name "BLA BLA BLA")
-;; :config
-;; (setq notmuch-show-logo nil)
-;; ;; Writing email
-;; (setq message-default-mail-headers "Cc: \nBcc: \n") ;; Always show BCC
-;; (setq notmuch-always-prompt-for-sender 't)
-;; ;; PGP Encryption
-;; (add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
-;; (setq notmuch-crypto-process-mime t)
-;; ;; Saving sent mail in folders depending on from
-;; (setq notmuch-fcc-dirs '(("gonzaponte@gmail.com" . "gonzaponte@gmail.com/enviado")
-;;                          ("gonzalo.martinez.lema.weizmann@gmail.com" . "gonzalo.martinez.lema.weizmann@gmail.com/enviado'")
-;;                          ))
-;; (setq notmuch-search-oldest-first nil)
-;;  )
+(use-package notmuch
+  :init
+  (setq message-directory "~/.mail")
+  (setq notmuch-identities
+        '("FULL NAME <USER@gmail.com>"
+          "FULL NAME <USER2@gmail.com>"
+          ))
+
+;; Send from correct email account
+  (setq send-mail-function 'sendmail-send-it
+        message-send-mail-function 'sendmail-send-it
+        sendmail-program "msmtp"
+        message-sendmail-f-is-evil t
+        message-sendmail-extra-arguments '("--read-envelope-from")
+        message-sendmail-f-is-eval 't
+        mail-specify-envelope-from t
+        mail-envelope-from 'header
+        message-sendmail-envelope-from 'header
+        mail-from-style nil)
+
+  ;; Setting proper from, fixes i-did-not-set--mail-host-address--so-tickle-me
+  (setq mail-host-address "blablabla.com")
+  (setq user-full-name "BLA BLA BLA")
+  :config
+  (setq notmuch-show-logo nil)
+  ;; Writing email
+  (setq message-default-mail-headers "Cc: \nBcc: \n") ;; Always show BCC
+  (setq notmuch-always-prompt-for-sender 't)
+  ;; PGP Encryption
+  ;; (add-hook 'message-setup-hook 'mml-secure-sign-pgpmime)
+  ;; (setq notmuch-crypto-process-mime t)
+  ;; Saving sent mail in folders depending on from
+  (setq notmuch-fcc-dirs '(("USER@gmail.com" . "USER@gmail.com/enviado")
+                           ("USER2@gmail.com" . "USER2@gmail.com/enviado'")
+                           ))
+  (setq notmuch-search-oldest-first nil)
+ )
+
+(setenv "TZ" "Europe/Madrid")>
+
 
 ;; SMART PARENS
 ;;(require 'smartparens-config)

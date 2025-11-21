@@ -216,6 +216,37 @@
 
 
 ;; MAIL
+
+;; Mu4e
+;; (use-package! mu4e
+;;   :load-path "/nix/store/mzaz0viz00xbn970khva0sw2dlzaykp0-emacs-mu4e-1.12.12/"
+;;   :ensure nil
+;;   :config
+;;   ;; Add any custom configuration here if necessary.
+;;   )
+
+;; (setq mail-user-agent 'mu4e-user-agent)
+
+;; (setq +mu4e-backend 'offlineimap)
+
+;; (setq +mu4e-gmail-accounts '(("XXX@gmail.com" . "~/mail/XXX@gmail.com/")
+;;                              ("YYY@gmail.com" . "~/mail/YYY@gmail.com/")))
+
+;; ;; don't need to run cleanup after indexing for gmail
+;; (setq mu4e-index-cleanup nil
+;;       ;; because gmail uses labels as folders we can use lazy check since
+;;       ;; messages don't really "move"
+;;       mu4e-index-lazy-check t)
+
+;; (set-email-account! "USER@gmail.com"
+;;   '((mu4e-sent-folder       . "/enviado")
+;;     (mu4e-drafts-folder     . "/borradores")
+;;     (mu4e-trash-folder      . "/delete")
+;;     (mu4e-refile-folder     . "/todo")
+;;     (smtpmail-smtp-user     . "XXX@gmail.com")
+;; ;;    (mu4e-compose-signature . "---\nHenrik Lissner"))
+;;   t)
+
 ;; SMTP
 ;; (setq mail-user-agent 'message-user-agent)
 ;; (setq send-mail-function 'smtpmail-send-it
@@ -270,8 +301,19 @@
   (setq notmuch-search-oldest-first nil)
  )
 
-(setenv "TZ" "Europe/Madrid")>
+(define-key notmuch-show-mode-map "i"
+      (lambda ()
+        "mark message as inbox"
+        (interactive)
+        (notmuch-show-tag (list "+inbox"))))
 
+(define-key notmuch-show-mode-map "p"
+      (lambda ()
+        "mark message as read and delete"
+        (interactive)
+        (notmuch-show-tag (list "-inbox -unread +delete"))))
+
+(setenv "TZ" "Europe/Madrid")
 
 ;; SMART PARENS
 ;;(require 'smartparens-config)

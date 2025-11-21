@@ -66,6 +66,7 @@ ignore=
 
 [search]
 exclude_tags=deleted;spam;
+default_sort=newest-first;
 
 # Maildir compatibility configuration
 #

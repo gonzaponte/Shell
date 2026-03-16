@@ -148,7 +148,11 @@
 ;; RUST-MODE
 (require 'rust-mode)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-
+(add-to-list 'eglot-server-programs `(rust-mode . ("rust-analyzer"
+                                                   :initializationOptions
+                                                   ( :procMacro (:enable t)
+                                                                :cargo ( :buildScripts (:enable t)
+                                                                                       :features "all")))))
 
 ;; COMPANY
 (global-company-mode)

@@ -1,4 +1,4 @@
-if $(conda --version &> /dev/null)
+if ! command -v conda &> /dev/null;
 then
     setup anaconda3
 fi

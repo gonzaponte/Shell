@@ -173,17 +173,18 @@ function clean_root(){
     snap list --all
     echo ""
     echo "Now removing the following packages:"
-    snap list --all | grep "desactivado"
+    snap list --all | grep "disabled"
     while true; do
-        read -p "OK?(y/N)" yn
+        printf "OK?(y/N) "
+        read yn
         case $yn in
             [nN]* ) return;;
             [yY]* ) break;;
             * ) echo "Invalid answer";;
         esac
     done
-    snap list --all | while read snapname v rev notes; do
-        if [[ $notes = *desactivado* ]]; then
+    snap list --all | while read snapname v rev trk pub notes; do
+        if [[ $notes = *disabled* ]]; then
             echo "Removing $snapname $rev"
             sudo snap remove "$snapname" --revision="$rev"
         fi

@@ -42,6 +42,7 @@ alias rmlatex="rm *.tex~;rm *.aux;rm *.synctex.gz;rm *.log;rm *.toc; rm *.nav; r
 alias rmpy="rm *.pyc;rm *.py~"
 
 alias mergepdf="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
+alias compresspdf="gs -q -dNOPAUSE -dBATCH -dQUIET -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -sOutputFile=compressed.pdf"
 
 alias foldersize="du -hsc"
 

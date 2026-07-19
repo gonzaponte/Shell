@@ -122,4 +122,4 @@ source ~/.zsh_exports
 
 eval "$(zoxide init zsh)"
 
-eval $(thefuck --alias)
+#eval $(thefuck --alias)

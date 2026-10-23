@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+if [ ! command -v nix ]; then
+    curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
+
+packages=(
+  bat
+  btop
+  cmake
+  direnv
+  dust
+  emacs
+  fastfetch
+  fd
+  fend
+  gcc
+  git
+  git-lfs
+  grex
+  jj
+  jjui
+  gnumake
+  pay-respects
+  pokemonsay
+  oh-my-zsh
+  rdfind
+  ripgrep
+  speedtest-cli
+  tldr
+  tree
+  wget
+  xclip
+  zoxide
+  zsh
+)
+
+for package in "${packages[@]}"; do
+  echo Installing $package ...
+  nix profile add nixpkgs#$package
+done
+
+nix profile add github:nix-community/nixGL --impure
+
+echo =========== Setting up zsh shell =============
+mkdir -p ~/sw/git/
+cd ~/sw/git
+git clone https://github.com/gonzaponte/Shell
+cd
+
+read -rp "Computer name: " computer
+read -rp "Copy from (leave empty for an existing configuration): " former
+
+if [ ! -z $former ]; then
+  cp -r ~/sw/git/Shell/$former ~/sw/git/Shell/$computer
+fi
+
+echo Linking zshrc  ; ln -s ~/sw/git/Shell/$computer/zshrc       ~/.zshrc
+echo Linking profile; ln -s ~/sw/git/Shell/$computer/zsh_profile ~/.zsh_profile
+echo Linking aliases; ln -s ~/sw/git/Shell/$computer/zsh_aliases ~/.zsh_aliases
+echo Linking exports; ln -s ~/sw/git/Shell/$computer/zsh_exports ~/.zsh_exports
+
+echo Adding zsh shell to etc list...
+zsh_path="$(command -v zsh)"
+if ! grep -Fxq "$zsh_path" /etc/shells; then
+  printf '%s\n' "$zsh_path" | sudo tee -a /etc/shells >/dev/null
+fi
+
+chsh -s "$zsh_path"
+
+ohmy="$(find /nix/store -maxdepth 3 -type d -path '*/share/oh-my-zsh' -print -quit)"
+zshrc=~/sw/git/Shell/$computer/zshrc
+sed -i "s|^export ZSH=.*|export ZSH=\"$ohmy\"|" $zshrc
+
+echo Linking configuration scripts
+ln -s ~/sw/git/Shell/Atenea/setups ~/.configuration_scripts
+
+echo =========== Installing p10k theme =============
+cd ~/sw
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
+cd
+ln -s sw/git/Shell/$computer/p10k.zsh .p10k.zsh
+
+echo =========== Installing doom =============
+echo "(Installing doom. Answer yes to the question)"
+git clone --depth 1 https://github.com/doomemacs/core ~/.config/emacs
+~/.config/emacs/bin/doom install
+rm -rf ~/.config/doom
+ln -s ~/sw/git/Shell/doom .config/doom
+
+echo =========== Installing emacs packages =============
+emacs --batch -l sw/git/Shell/emacs-packages.el
+rm -rf ~/.emacs.d
+doom sync
+
+
+echo Ready to go. Start a new shell and it should work.
+echo Remember to run
+echo git config --global user.name "Your name"
+echo git config --global user.email "mail@domain.com"
+echo Remember to change the url for ~/sw/git/Shell to an ssh-based one when you get the your ssh-key established

@@ -42,6 +42,7 @@ alias rmlatex="rm *.tex~;rm *.aux;rm *.synctex.gz;rm *.log;rm *.toc; rm *.nav; r
 alias rmpy="rm *.pyc;rm *.py~"
 
 alias mergepdf="gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=merged.pdf"
+alias compresspdf="gs -q -dNOPAUSE -dBATCH -dQUIET -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -sOutputFile=compressed.pdf"
 
 alias foldersize="du -hsc"
 
@@ -172,17 +173,18 @@ function clean_root(){
     snap list --all
     echo ""
     echo "Now removing the following packages:"
-    snap list --all | grep "desactivado"
+    snap list --all | grep "disabled"
     while true; do
-        read -p "OK?(y/N)" yn
+        printf "OK?(y/N) "
+        read yn
         case $yn in
             [nN]* ) return;;
             [yY]* ) break;;
             * ) echo "Invalid answer";;
         esac
     done
-    snap list --all | while read snapname v rev notes; do
-        if [[ $notes = *desactivado* ]]; then
+    snap list --all | while read snapname v rev trk pub notes; do
+        if [[ $notes = *disabled* ]]; then
             echo "Removing $snapname $rev"
             sudo snap remove "$snapname" --revision="$rev"
         fi
@@ -256,3 +258,5 @@ alias em="emacs &"
 alias emnw="emacs -nw"
 
 alias meow="nixGL kitty"
+
+alias afirma="GTK_THEME=Adwaita:light autofirma"

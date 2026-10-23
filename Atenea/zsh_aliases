@@ -258,3 +258,5 @@ alias em="emacs &"
 alias emnw="emacs -nw"
 
 alias meow="nixGL kitty"
+
+alias afirma="GTK_THEME=Adwaita:light autofirma"

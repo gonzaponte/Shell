@@ -1,10 +1,7 @@
-if ! command -v conda &> /dev/null;
-then
-    setup anaconda3
-fi
+setup anaconda3
 
 cd $GITDIR/IC
-source manage.sh work_in_python_version_no_tests 3.8
+source manage.sh activate
 cd -
 
 setup jupytools

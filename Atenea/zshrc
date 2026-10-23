@@ -129,3 +129,6 @@ source ~/sw/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source ~/.zsh_profile
+
+# opencode
+export PATH=/home/gonzalo/.opencode/bin:$PATH

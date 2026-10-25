@@ -10,3 +10,7 @@ export DOOMBIN="$HOME/.config/emacs/bin"
 export PATH=$PATH:$DOOMBIN
 
 eval "$(pay-respects zsh --alias)"
+
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=1000000

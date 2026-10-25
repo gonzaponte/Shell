@@ -123,3 +123,14 @@ source ~/.zsh_exports
 eval "$(zoxide init zsh)"
 
 #eval $(thefuck --alias)
+
+setopt autocd beep nomatch
+unsetopt extendedglob notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+#zstyle :compinstall filename '/home/gonzalo/.zshrc'
+
+#autoload -Uz compinit
+#compinit
+# End of lines added by compinstall

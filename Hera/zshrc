@@ -9,7 +9,8 @@ fi
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-export ZSH=/nix/store/8xf7hma34yly3ajnyaah9kc1pxfw7si5-oh-my-zsh-2026-02-19/share/oh-my-zsh
+export ZSH="/nix/store/m4n0073530aqyyapylrc4n8cfra0llrc-oh-my-zsh-2026-08-16/share/oh-my-zsh"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME

@@ -1,0 +1,21 @@
+# check for existing profiles with
+# Test-Path $PROFILE
+# create a new one with
+# New-Item -Path $PROFILE -ItemType File -Force
+# edit it with
+# notepad $PROFILE
+# load it with
+# . $PROFILE
+
+function extract-frames {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$video_file
+    )
+
+    $output_dir = "$( [System.IO.Path]::GetFileNameWithoutExtension($video_file) )_frames"
+
+    New-Item -ItemType Directory -Force -Path $output_dir | Out-Null
+
+    ffmpeg -i $video_file "$output_dir\frame_%06d.jpeg"
+}
